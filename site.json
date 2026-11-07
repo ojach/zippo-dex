@@ -5,10 +5,22 @@
   "author": "Zippo Gallery",
   "brand_color": "#522886",
   "icon": "",
-  "author_image": "",
+  "author_image": "author.webp",
   "language": "ja-JP",
   "features": {
     "article_summary": true,
     "article_pwa_icons": false
+  },
+"author_locales": {
+  "ja": {
+    "name": "KoJi",
+    "description": "ZIPPOライターを収集し続けて40年。年代やデザイン、使い込まれた風合いなど、一つひとつに異なる魅力を感じながらコレクションを続けています。このギャラリーでは、長年集めてきたZIPPOを写真とともに記録・公開しています。時代を超えて受け継がれるZIPPOの魅力を、少しでも楽しんでいただければ幸いです。",
+    "url": "https://ojapp.app/ojach/app/"
+  },
+  "en": {
+    "name": "KoJi",
+    "description": "A passionate ZIPPO collector with 40 years of collecting experience. From vintage designs to the unique character of well-used lighters, every piece has its own charm and story. This gallery is a personal archive of ZIPPO lighters collected over the decades, documented and shared through photographs. I hope you enjoy exploring the timeless appeal and history of ZIPPO.",
+    "url": "https://ojapp.app/ojach/app/"
   }
+}
 }
