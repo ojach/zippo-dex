@@ -656,3 +656,31 @@ a:hover {
   }
 }
 
+
+/* ZIPPO gallery: home page only */
+.home-grid { display: block; }
+.home-grid > section { min-width: 0; }
+.home-grid > .side-note { display: none; }
+.article-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.article-card { min-width: 0; padding: 0; border: 0; }
+.gallery-card-link { display: block; color: var(--ink); }
+.gallery-card-link:hover { text-decoration: none; }
+.gallery-thumbnail {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--soft);
+}
+.article-card h2 { font-size: 1rem; line-height: 1.4; margin: 10px 0 4px; }
+.gallery-card-link:hover h2 { color: var(--brand); }
+.article-card .article-meta { margin-top: 3px; }
+@media (max-width: 760px) {
+  .article-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .article-card h2 { font-size: .9rem; }
+}

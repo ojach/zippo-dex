@@ -354,6 +354,7 @@ const makeSearchIndex = (languageArticles) => languageArticles.map((article) => 
   published: article.published,
   displayDate: formatDate(article.published, article.language),
   category: article.category,
+  thumbnail: article.thumbnail ? optimizedImageUrl(basePath, article.thumbnail) : '',
 }));
 const defaultLanguage = localeKey(site.language || 'ja');
 const defaultLabels = localeText(defaultLanguage);
@@ -367,7 +368,14 @@ for (const language of languages) {
   const searchFilename = language === defaultLanguage ? 'search-index.json' : `search-index.${language}.json`;
   const searchIndexUrl = withBase(basePath, `/${searchFilename}`);
   const pageCount = Math.max(1, Math.ceil(languageArticles.length / articlesPerPage));
-  const cardsFor = (page) => languageArticles.slice((page - 1) * articlesPerPage, page * articlesPerPage).map((article) => `<li class="article-card" data-card><div class="article-meta">${article.published ? `<time datetime="${esc(article.published)}">${esc(formatDate(article.published, article.language))}</time>` : `<span>${esc(labels.noDate)}</span>`}${article.category ? ` · ${esc(article.category)}` : ''}</div><h2><a href="${esc(withBase(basePath, `/${article.permalink}/`))}">${esc(article.title)}</a></h2><p>${esc(article.excerpt)}</p></li>`).join('');
+  const cardsFor = (page) => languageArticles.slice((page - 1) * articlesPerPage, page * articlesPerPage).map((article) => {
+    const href = withBase(basePath, `/${article.permalink}/`);
+    const thumbnailUrl = optimizedImageUrl(basePath, article.thumbnail);
+    const image = thumbnailUrl
+      ? `<img class="gallery-thumbnail" src="${esc(thumbnailUrl)}" alt="${esc(article.thumbnailAlt)}" loading="lazy">`
+      : `<span class="gallery-thumbnail gallery-placeholder" aria-hidden="true"></span>`;
+    return `<li class="article-card" data-card><a class="gallery-card-link" href="${esc(href)}">${image}<h2>${esc(article.title)}</h2></a>${article.category ? `<div class="article-meta">${esc(article.category)}</div>` : ''}</li>`;
+  }).join('');
   const languageHomeUrl = languages.length > 1
     ? withBase(basePath, languageHomePath(language === 'en' ? 'ja' : 'en'))
     : '';
@@ -449,7 +457,7 @@ if (site.features?.article_pwa_icons === true && !article.pwaIcon) {
     ? `<p class="article-summary-next"><span>${esc(labels.next)}</span><a href="${esc(withBase(basePath, `/${nextArticle.permalink}/`))}">${esc(nextArticle.title)}</a></p>`
     : '';
   const summaryHtml = site.features?.article_summary !== false && article.summary
-    ? `<details class="article-summary"><summary>${esc(labels.summary)}</summary><div class="article-summary-content">${marked.parse(article.summary)}${summaryNextHtml}</div></details>`
+    ? `<details class="article-summary" open><summary>${esc(labels.summary)}</summary><div class="article-summary-content">${marked.parse(article.summary)}${summaryNextHtml}</div></details>`
     : '';
   const recommendations = articles.filter((candidate) => candidate.language === article.language && candidate !== article && candidate !== nextArticle).slice(0, 3);
   const nextSection = nextArticle
