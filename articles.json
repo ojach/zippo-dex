@@ -1,30 +1,30 @@
 {
-  "1-1": {
+  "1-10": {
     "title": "1984年製レギュラー スチール製 Zippoライター",
     "meta_description": "1984年製のレギュラーサイズのスチール製Zippoライターです。中古品で、箱や付属品はありません。コレクションや日常使用に最適な一品です。",
     "excerpt": "1984年製のレギュラーサイズのスチール製Zippoライターです。中古品で、箱や付属品はありません。コレクションや日常使用に最適な一品です。",
     "summary": "- **年代**：1984年\n- **形状**：レギュラー\n- **材質**：スチール\n- **状態**：中古\n- **備考**：箱・付属品なし",
-    "permalink": "1-1",
+    "permalink": "1-10",
     "category": "ZIPPO",
     "language": "ja",
-    "thumbnail": "1-1.webp",
+    "thumbnail": "1-10-1.webp",
     "thumbnail_alt": "1984年製レギュラー スチール製 Zippoライター",
     "show_thumbnail": true,
-    "translation": "en--1-1",
+    "translation": "en--1-10",
     "published": "2026-11-01"
   },
-  "en--1-1": {
+  "en--1-10": {
     "title": "1984 Regular-Size Steel Zippo Lighter",
     "meta_description": "A regular-size steel Zippo lighter from 1984. This pre-owned lighter comes without its original box or accessories. A great addition to any collection or for everyday use.",
     "excerpt": "A regular-size steel Zippo lighter from 1984. This pre-owned lighter comes without its original box or accessories. A great addition to any collection or for everyday use.",
     "summary": "- **Year**: 1984\n- **Size**: Regular\n- **Material**: Steel\n- **Condition**: Used\n- **Notes**: No original box or accessories",
-    "permalink": "en/1-1",
+    "permalink": "en/1-10",
     "category": "ZIPPO",
     "language": "en",
-    "thumbnail": "1-1.jpg",
+    "thumbnail": "1-10-1.jpg",
     "thumbnail_alt": "1984 Regular-Size Steel Zippo Lighter",
     "show_thumbnail": true,
-    "translation": "1-1",
+    "translation": "1-10",
     "published": "2026-11-01"
   }
 }
