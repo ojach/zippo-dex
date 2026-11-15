@@ -359,7 +359,7 @@ const makeSearchIndex = (languageArticles) => languageArticles.map((article) => 
 const defaultLanguage = localeKey(site.language || 'ja');
 const defaultLabels = localeText(defaultLanguage);
 const languages = [...new Set(articles.map((article) => article.language))];
-const articlesPerPage = 15;
+const articlesPerPage = 20;
 const languageHomePath = (language) => language === defaultLanguage ? '/' : `/${language}/`;
 for (const language of languages) {
   const languageArticles = articles.filter((article) => article.language === language);
@@ -381,8 +381,8 @@ for (const language of languages) {
     : '';
   for (let page = 1; page <= pageCount; page += 1) {
   const pageRoute = page === 1 ? route : `${route.replace(/\/$/, '')}/page/${page}/`;
-  const previous = page > 1 ? `<a href="${esc(withBase(basePath, page === 2 ? route : `${route.replace(/\/$/, '')}/page/${page - 1}/`))}">← 前の15件</a>` : '';
-  const next = page < pageCount ? `<a href="${esc(withBase(basePath, `${route.replace(/\/$/, '')}/page/${page + 1}/`))}">次の15件 →</a>` : '';
+  const previous = page > 1 ? `<a href="${esc(withBase(basePath, page === 2 ? route : `${route.replace(/\/$/, '')}/page/${page - 1}/`))}">← 前の20件</a>` : '';
+  const next = page < pageCount ? `<a href="${esc(withBase(basePath, `${route.replace(/\/$/, '')}/page/${page + 1}/`))}">次の20件 →</a>` : '';
   const pagination = pageCount > 1 ? `<nav class="pagination" aria-label="記事一覧ページ">${previous}<span>${page} / ${pageCount}</span>${next}</nav>` : '';
   const home = fillTemplate(homeTemplate, {
     introTitle: esc(labels.introTitle),
