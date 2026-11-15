@@ -7,7 +7,14 @@ if (input && list) {
   let matchingArticles = [];
   let currentPage = 1;
   const originalHtml = list.innerHTML;
+  const originalPagination = list.nextElementSibling?.matches('nav.pagination')
+    ? list.nextElementSibling
+    : null;
   let pagination = null;
+
+  const setOriginalPaginationVisible = (visible) => {
+    if (originalPagination) originalPagination.style.display = visible ? '' : 'none';
+  };
 
   const addText = (parent, tag, text, className) => {
     const element = document.createElement(tag);
@@ -103,11 +110,13 @@ if (input && list) {
   const updateSearch = () => {
     const query = normalize(input.value.trim());
     if (!query) {
+      setOriginalPaginationVisible(true);
       removePagination();
       list.innerHTML = originalHtml;
       return;
     }
 
+    setOriginalPaginationVisible(false);
     matchingArticles = articles.filter((article) =>
       [article.title, article.description, article.excerpt, article.category]
         .filter(Boolean)
