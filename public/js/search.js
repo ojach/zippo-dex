@@ -69,28 +69,28 @@ if (input && list) {
       const item = document.createElement('li');
       item.className = 'article-card';
       item.dataset.card = '';
+
+      const link = document.createElement('a');
+      link.className = 'gallery-card-link';
+      link.href = article.url;
+
       if (article.thumbnail) {
-        item.classList.add('has-thumbnail');
         const image = document.createElement('img');
-        image.className = 'card-thumbnail';
+        image.className = 'gallery-thumbnail';
         image.src = article.thumbnail;
-        image.alt = '';
+        image.alt = article.title || '';
         image.loading = 'lazy';
-        item.append(image);
+        link.append(image);
+      } else {
+        const placeholder = document.createElement('span');
+        placeholder.className = 'gallery-thumbnail gallery-placeholder';
+        placeholder.setAttribute('aria-hidden', 'true');
+        link.append(placeholder);
       }
 
-      const copy = document.createElement('div');
-      copy.className = 'card-copy';
-      const meta = [article.displayDate || article.published, article.category].filter(Boolean).join(' · ');
-      addText(copy, 'div', meta, 'article-meta');
-      const heading = document.createElement('h2');
-      const link = document.createElement('a');
-      link.href = article.url;
-      link.textContent = article.title;
-      heading.append(link);
-      copy.append(heading);
-      addText(copy, 'p', article.excerpt || article.description || '');
-      item.append(copy);
+      addText(link, 'h2', article.title || '');
+      item.append(link);
+      if (article.category) addText(item, 'div', article.category, 'article-meta');
       list.append(item);
     }
 
