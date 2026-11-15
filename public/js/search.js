@@ -97,16 +97,11 @@ if (input && list) {
     renderPagination();
   };
 
-  fetch(input.dataset.indexUrl || 'search-index.json')
-    .then((response) => {
-      if (!response.ok) throw new Error('Search index unavailable');
-      return response.json();
-    })
-    .then((data) => { articles = data; })
-    .catch(() => {});
+  // Search titles, descriptions, excerpts, and categories (including Japanese names).
+  const normalize = (value) => String(value ?? '').normalize('NFKC').toLocaleLowerCase();
 
-  input.addEventListener('input', () => {
-    const query = input.value.trim().toLocaleLowerCase();
+  const updateSearch = () => {
+    const query = normalize(input.value.trim());
     if (!query) {
       removePagination();
       list.innerHTML = originalHtml;
@@ -114,11 +109,9 @@ if (input && list) {
     }
 
     matchingArticles = articles.filter((article) =>
-      [article.title, article.description, article.category]
+      [article.title, article.description, article.excerpt, article.category]
         .filter(Boolean)
-        .join(' ')
-        .toLocaleLowerCase()
-        .includes(query)
+        .some((value) => normalize(value).includes(query))
     );
     currentPage = 1;
 
@@ -130,5 +123,19 @@ if (input && list) {
     }
 
     renderResults();
-  });
+  };
+
+  input.addEventListener('input', updateSearch);
+
+  fetch(input.dataset.indexUrl || 'search-index.json')
+    .then((response) => {
+      if (!response.ok) throw new Error('Search index unavailable');
+      return response.json();
+    })
+    .then((data) => {
+      articles = Array.isArray(data) ? data : [];
+      // Re-run searches typed before the index finished loading.
+      if (input.value.trim()) updateSearch();
+    })
+    .catch((error) => console.warn('Search index could not be loaded:', error));
 }
