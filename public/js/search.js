@@ -47,7 +47,7 @@ if (input && list) {
 
     const makePageLink = (text, targetPage) => {
       const link = document.createElement('a');
-      link.href = '#article-search';
+      link.href = window.location.pathname + '#article-search';
       link.textContent = text;
       link.addEventListener('click', (event) => {
         event.preventDefault();
@@ -60,6 +60,7 @@ if (input && list) {
     if (currentPage > 1) {
       pagination.append(makePageLink('← 前の18件', currentPage - 1));
     }
+    // Match the static build.js pagination: only anchors and a page counter.
     const status = document.createElement('span');
     status.setAttribute('aria-live', 'polite');
     status.textContent = `${currentPage} / ${pageCount}`;
